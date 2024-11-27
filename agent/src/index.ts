@@ -1,42 +1,43 @@
 import { PostgresDatabaseAdapter } from "@ai16z/adapter-postgres";
 import { SqliteDatabaseAdapter } from "@ai16z/adapter-sqlite";
+import { AutoClientInterface } from "@ai16z/client-auto";
 import { DirectClientInterface } from "@ai16z/client-direct";
 import { DiscordClientInterface } from "@ai16z/client-discord";
-import { AutoClientInterface } from "@ai16z/client-auto";
 import { TelegramClientInterface } from "@ai16z/client-telegram";
 import { TwitterClientInterface } from "@ai16z/client-twitter";
 import {
-    DbCacheAdapter,
-    defaultCharacter,
-    FsCacheAdapter,
-    ICacheManager,
-    IDatabaseCacheAdapter,
-    stringToUuid,
     AgentRuntime,
     CacheManager,
     Character,
+    DbCacheAdapter,
+    FsCacheAdapter,
     IAgentRuntime,
+    ICacheManager,
+    IDatabaseAdapter,
+    IDatabaseCacheAdapter,
     ModelProviderName,
+    defaultCharacter,
     elizaLogger,
     settings,
-    IDatabaseAdapter,
+    stringToUuid,
     validateCharacterConfig,
 } from "@ai16z/eliza";
+import { zgPlugin } from "@ai16z/plugin-0g";
 import { bootstrapPlugin } from "@ai16z/plugin-bootstrap";
-import { solanaPlugin } from "@ai16z/plugin-solana";
-import { nodePlugin } from "@ai16z/plugin-node";
+import { buttplugPlugin } from "@ai16z/plugin-buttplug";
 import {
     coinbaseCommercePlugin,
     coinbaseMassPaymentsPlugin,
 } from "@ai16z/plugin-coinbase";
+import { confluxPlugin } from "@ai16z/plugin-conflux";
+import { createNodePlugin } from "@ai16z/plugin-node";
+import { solanaPlugin } from "@ai16z/plugin-solana";
 import Database from "better-sqlite3";
 import fs from "fs";
-import readline from "readline";
-import yargs from "yargs";
 import path from "path";
+import readline from "readline";
 import { fileURLToPath } from "url";
-import { character } from "./character.ts";
-import type { DirectClient } from "@ai16z/client-direct";
+import yargs from "yargs";
 
 const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
 const __dirname = path.dirname(__filename); // get the name of the directory
@@ -130,6 +131,11 @@ export function getTokenForProvider(
             return (
                 character.settings?.secrets?.OPENAI_API_KEY ||
                 settings.OPENAI_API_KEY
+            );
+        case ModelProviderName.ETERNALAI:
+            return (
+                character.settings?.secrets?.ETERNALAI_API_KEY ||
+                settings.ETERNALAI_API_KEY
             );
         case ModelProviderName.LLAMACLOUD:
             return (
@@ -233,6 +239,12 @@ export async function initializeClients(
     return clients;
 }
 
+function getSecret(character: Character, secret: string) {
+    return character.settings.secrets?.[secret] || process.env[secret];
+}
+
+let nodePlugin: any | undefined;
+
 export function createAgent(
     character: Character,
     db: IDatabaseAdapter,
@@ -244,6 +256,9 @@ export function createAgent(
         "Creating runtime for character",
         character.name
     );
+
+    nodePlugin ??= createNodePlugin();
+
     return new AgentRuntime({
         databaseAdapter: db,
         token,
@@ -252,18 +267,20 @@ export function createAgent(
         character,
         plugins: [
             bootstrapPlugin,
+            getSecret(character, "CONFLUX_CORE_PRIVATE_KEY")
+                ? confluxPlugin
+                : null,
             nodePlugin,
-            character.settings.secrets?.WALLET_PUBLIC_KEY ? solanaPlugin : null,
-            character.settings.secrets?.COINBASE_COMMERCE_KEY ||
-            process.env.COINBASE_COMMERCE_KEY
+            getSecret(character, "WALLET_PUBLIC_KEY") ? solanaPlugin : null,
+            getSecret(character, "ZEROG_PRIVATE_KEY") ? zgPlugin : null,
+            getSecret(character, "COINBASE_COMMERCE_KEY")
                 ? coinbaseCommercePlugin
                 : null,
-            (character.settings.secrets?.COINBASE_API_KEY ||
-                process.env.COINBASE_API_KEY) &&
-            (character.settings.secrets?.COINBASE_PRIVATE_KEY ||
-                process.env.COINBASE_PRIVATE_KEY)
+            getSecret(character, "COINBASE_API_KEY") &&
+            getSecret(character, "COINBASE_PRIVATE_KEY")
                 ? coinbaseMassPaymentsPlugin
                 : null,
+            getSecret(character, "BUTTPLUG_API_KEY") ? buttplugPlugin : null,
         ].filter(Boolean),
         providers: [],
         actions: [],
@@ -285,7 +302,7 @@ function intializeDbCache(character: Character, db: IDatabaseCacheAdapter) {
     return cache;
 }
 
-async function startAgent(character: Character, directClient: any) {
+async function startAgent(character: Character, directClient) {
     try {
         character.id ??= stringToUuid(character.name);
         character.username ??= character.name;
@@ -327,7 +344,7 @@ const startAgents = async () => {
 
     let charactersArg = args.characters || args.character;
 
-    let characters = [character];
+    let characters = [defaultCharacter];
 
     if (charactersArg) {
         characters = await loadCharacters(charactersArg);
@@ -335,7 +352,7 @@ const startAgents = async () => {
 
     try {
         for (const character of characters) {
-            await startAgent(character, directClient as any);
+            await startAgent(character, directClient);
         }
     } catch (error) {
         elizaLogger.error("Error starting agents:", error);
@@ -365,16 +382,9 @@ const rl = readline.createInterface({
     output: process.stdout,
 });
 
-rl.on("SIGINT", () => {
-    rl.close();
-    process.exit(0);
-});
-
 async function handleUserInput(input, agentId) {
     if (input.toLowerCase() === "exit") {
-        rl.close();
-        process.exit(0);
-        return;
+        gracefulExit();
     }
 
     try {
@@ -399,3 +409,12 @@ async function handleUserInput(input, agentId) {
         console.error("Error fetching response:", error);
     }
 }
+
+async function gracefulExit() {
+    elizaLogger.log("Terminating and cleaning up resources...");
+    rl.close();
+    process.exit(0);
+}
+
+rl.on("SIGINT", gracefulExit);
+rl.on("SIGTERM", gracefulExit);

@@ -10,7 +10,7 @@
 
 #### Defined in
 
-[packages/core/src/types.ts:1079](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L1079)
+[packages/core/src/types.ts:1136](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L1136)
 
 ***
 
@@ -20,7 +20,7 @@
 
 #### Defined in
 
-[packages/core/src/types.ts:1080](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L1080)
+[packages/core/src/types.ts:1137](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L1137)
 
 ***
 
@@ -30,7 +30,7 @@
 
 #### Defined in
 
-[packages/core/src/types.ts:1081](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L1081)
+[packages/core/src/types.ts:1138](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L1138)
 
 ***
 
@@ -40,7 +40,7 @@
 
 #### Defined in
 
-[packages/core/src/types.ts:1082](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L1082)
+[packages/core/src/types.ts:1139](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L1139)
 
 ***
 
@@ -50,7 +50,7 @@
 
 #### Defined in
 
-[packages/core/src/types.ts:1083](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L1083)
+[packages/core/src/types.ts:1140](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L1140)
 
 ***
 
@@ -60,7 +60,7 @@
 
 #### Defined in
 
-[packages/core/src/types.ts:1084](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L1084)
+[packages/core/src/types.ts:1141](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L1141)
 
 ***
 
@@ -70,4 +70,14 @@
 
 #### Defined in
 
-[packages/core/src/types.ts:1085](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L1085)
+[packages/core/src/types.ts:1142](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L1142)
+
+***
+
+### BUTTPLUG
+
+> **BUTTPLUG**: `"buttplug"`
+
+#### Defined in
+
+[packages/core/src/types.ts:1143](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L1143)

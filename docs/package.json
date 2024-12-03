@@ -1,6 +1,6 @@
 {
   "name": "eliza-docs",
-  "version": "0.0.0",
+  "version": "0.1.4-alpha.3",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
@@ -49,6 +49,6 @@
     ]
   },
   "engines": {
-    "node": "23.1.0"
+    "node": "23.3.0"
   }
 }

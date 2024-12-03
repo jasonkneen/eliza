@@ -38,6 +38,12 @@ Optional system prompt
 
 Model provider to use
 
+### imageModelProvider?
+
+> `optional` **imageModelProvider**: [`ModelProviderName`](../enumerations/ModelProviderName.md)
+
+Image model provider to use, if different from modelProvider
+
 ### modelEndpointOverride?
 
 > `optional` **modelEndpointOverride**: `string`
@@ -90,6 +96,18 @@ Optional prompt templates
 
 > `optional` **twitterShouldRespondTemplate**: `string`
 
+### templates.farcasterPostTemplate?
+
+> `optional` **farcasterPostTemplate**: `string`
+
+### templates.farcasterMessageHandlerTemplate?
+
+> `optional` **farcasterMessageHandlerTemplate**: `string`
+
+### templates.farcasterShouldRespondTemplate?
+
+> `optional` **farcasterShouldRespondTemplate**: `string`
+
 ### templates.telegramMessageHandlerTemplate?
 
 > `optional` **telegramMessageHandlerTemplate**: `string`
@@ -133,12 +151,6 @@ Example messages
 > **postExamples**: `string`[]
 
 Example posts
-
-### people
-
-> **people**: `string`[]
-
-Known people
 
 ### topics
 
@@ -184,6 +196,10 @@ Optional configuration
 
  \[`key`: `string`\]: `string`
 
+### settings.buttplug?
+
+> `optional` **buttplug**: `boolean`
+
 ### settings.voice?
 
 > `optional` **voice**: `object`
@@ -196,6 +212,36 @@ Optional configuration
 
 > `optional` **url**: `string`
 
+### settings.voice.elevenlabs?
+
+> `optional` **elevenlabs**: `object`
+
+### settings.voice.elevenlabs.voiceId
+
+> **voiceId**: `string`
+
+New structured ElevenLabs config
+
+### settings.voice.elevenlabs.model?
+
+> `optional` **model**: `string`
+
+### settings.voice.elevenlabs.stability?
+
+> `optional` **stability**: `string`
+
+### settings.voice.elevenlabs.similarityBoost?
+
+> `optional` **similarityBoost**: `string`
+
+### settings.voice.elevenlabs.style?
+
+> `optional` **style**: `string`
+
+### settings.voice.elevenlabs.useSpeakerBoost?
+
+> `optional` **useSpeakerBoost**: `string`
+
 ### settings.model?
 
 > `optional` **model**: `string`
@@ -203,6 +249,22 @@ Optional configuration
 ### settings.embeddingModel?
 
 > `optional` **embeddingModel**: `string`
+
+### settings.chains?
+
+> `optional` **chains**: `object`
+
+#### Index Signature
+
+ \[`key`: `string`\]: `any`[]
+
+### settings.chains.evm?
+
+> `optional` **evm**: `any`[]
+
+### settings.chains.solana?
+
+> `optional` **solana**: `any`[]
 
 ### clientConfig?
 
@@ -280,4 +342,4 @@ Optional Twitter profile
 
 ## Defined in
 
-[packages/core/src/types.ts:590](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L590)
+[packages/core/src/types.ts:607](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L607)

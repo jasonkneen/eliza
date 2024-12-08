@@ -13,19 +13,17 @@ import {
     State,
     stringToUuid,
     elizaLogger,
+    getEmbeddingZeroVector,
 } from "@ai16z/eliza";
 import { ClientBase } from "./base";
 import { buildConversationThread, sendTweet, wait } from "./utils.ts";
-import { embeddingZeroVector } from "@ai16z/eliza";
 
 export const twitterMessageHandlerTemplate =
-    `{{timeline}}
-
-# Knowledge
+    `
+# Areas of Expertise
 {{knowledge}}
 
-# Task: Generate a post for the character {{agentName}}.
-About {{agentName}} (@{{twitterUserName}}):
+# About {{agentName}} (@{{twitterUserName}}):
 {{bio}}
 {{lore}}
 {{topics}}
@@ -41,17 +39,19 @@ Recent interactions between {{agentName}} and other users:
 
 {{recentPosts}}
 
-
 # Task: Generate a post/reply in the voice, style and perspective of {{agentName}} (@{{twitterUserName}}) while using the thread of tweets as additional context:
 Current Post:
 {{currentPost}}
-Thread of Tweets You Are Replying To:
 
+Thread of Tweets You Are Replying To:
 {{formattedConversation}}
 
 {{actions}}
 
-# Task: Generate a post in the voice, style and perspective of {{agentName}} (@{{twitterUserName}}). Include an action, if appropriate. {{actionNames}}:
+# Task: Generate a post in the voice, style and perspective of {{agentName}} (@{{twitterUserName}}). You MUST include an action if the current post text includes a prompt that is similar to one of the available actions mentioned here:
+{{actionNames}}
+
+Here is the current post text again. Remember to include an action if the current post text includes a prompt that asks for one of the available actions mentioned above (does not need to be exact):
 {{currentPost}}
 ` + messageCompletionFooter;
 
@@ -63,7 +63,7 @@ Response options are RESPOND, IGNORE and STOP .
 {{agentName}} should respond to messages that are directed at them, or participate in conversations that are interesting or relevant to their background, IGNORE messages that are irrelevant to them, and should STOP if the conversation is concluded.
 
 {{agentName}} is in a room with other users and wants to be conversational, but not annoying.
-{{agentName}} should RESPOND to messages that are directed at them, or participate in conversations that are interesting or relevant to their background.
+{{agentName}} must RESPOND to messages that are directed at them, a command towards them, or participate in conversations that are interesting or relevant to their background.
 If a message is not interesting or relevant, {{agentName}} should IGNORE.
 Unless directly RESPONDing to a user, {{agentName}} should IGNORE messages that are very short or do not contain much information.
 If a user asks {{agentName}} to stop talking, {{agentName}} should STOP.
@@ -96,8 +96,10 @@ export class TwitterInteractionClient {
             this.handleTwitterInteractions();
             setTimeout(
                 handleTwitterInteractionsLoop,
-                (Math.floor(Math.random() * (5 - 2 + 1)) + 2) * 60 * 1000
-            ); // Random interval between 2-5 minutes
+                Number(
+                    this.runtime.getSetting("TWITTER_POLL_INTERVAL") || 120
+                ) * 1000 // Default to 2 minutes
+            );
         };
         handleTwitterInteractionsLoop();
     }
@@ -129,6 +131,23 @@ export class TwitterInteractionClient {
                     !this.client.lastCheckedTweetId ||
                     BigInt(tweet.id) > this.client.lastCheckedTweetId
                 ) {
+                    // Generate the tweetId UUID the same way it's done in handleTweet
+                    const tweetId = stringToUuid(
+                        tweet.id + "-" + this.runtime.agentId
+                    );
+
+                    // Check if we've already processed this tweet
+                    const existingResponse =
+                        await this.runtime.messageManager.getMemoryById(
+                            tweetId
+                        );
+
+                    if (existingResponse) {
+                        elizaLogger.log(
+                            `Already responded to tweet ${tweet.id}, skipping`
+                        );
+                        continue;
+                    }
                     elizaLogger.log("New Tweet found", tweet.permanentUrl);
 
                     const roomId = stringToUuid(
@@ -208,17 +227,6 @@ export class TwitterInteractionClient {
         };
         const currentPost = formatTweet(tweet);
 
-        let homeTimeline: Tweet[] = [];
-        // read the file if it exists
-
-        const cachedTimeline = await this.client.getCachedTimeline();
-        if (cachedTimeline) {
-            homeTimeline = cachedTimeline;
-        } else {
-            homeTimeline = await this.client.fetchHomeTimeline(50);
-            await this.client.cacheTimeline(homeTimeline);
-        }
-
         elizaLogger.debug("Thread: ", thread);
         const formattedConversation = thread
             .map(
@@ -236,20 +244,11 @@ export class TwitterInteractionClient {
 
         elizaLogger.debug("formattedConversation: ", formattedConversation);
 
-        const formattedHomeTimeline =
-            `# ${this.runtime.character.name}'s Home Timeline\n\n` +
-            homeTimeline
-                .map((tweet) => {
-                    return `ID: ${tweet.id}\nFrom: ${tweet.name} (@${tweet.username})${tweet.inReplyToStatusId ? ` In reply to: ${tweet.inReplyToStatusId}` : ""}\nText: ${tweet.text}\n---\n`;
-                })
-                .join("\n");
-
         let state = await this.runtime.composeState(message, {
             twitterClient: this.client.twitterClient,
             twitterUserName: this.runtime.getSetting("TWITTER_USERNAME"),
             currentPost,
             formattedConversation,
-            timeline: formattedHomeTimeline,
         });
 
         // check if the tweet exists, save if it doesn't
@@ -449,7 +448,7 @@ export class TwitterInteractionClient {
                         currentTweet.userId === this.twitterUserId
                             ? this.runtime.agentId
                             : stringToUuid(currentTweet.userId),
-                    embedding: embeddingZeroVector,
+                    embedding: getEmbeddingZeroVector(),
                 });
             }
 

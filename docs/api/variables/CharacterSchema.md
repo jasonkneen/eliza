@@ -1,4 +1,4 @@
-[@ai16z/eliza v0.1.4-alpha.3](../index.md) / CharacterSchema
+[@ai16z/eliza v0.1.5-alpha.3](../index.md) / CharacterSchema
 
 # Variable: CharacterSchema
 
@@ -48,10 +48,6 @@ Main Character schema
 
 > **postExamples**: `ZodArray`\<`ZodString`, `"many"`\>
 
-### people
-
-> **people**: `ZodArray`\<`ZodString`, `"many"`\>
-
 ### topics
 
 > **topics**: `ZodArray`\<`ZodString`, `"many"`\>
@@ -70,7 +66,7 @@ Main Character schema
 
 ### plugins
 
-> **plugins**: `ZodArray`\<`ZodObject`\<`object`, `"strip"`, `ZodTypeAny`, `object`, `object`\>, `"many"`\>
+> **plugins**: `ZodUnion`\<[`ZodArray`\<`ZodString`, `"many"`\>, `ZodArray`\<`ZodObject`\<`object`, `"strip"`, `ZodTypeAny`, `object`, `object`\>, `"many"`\>]\>
 
 ### settings
 
@@ -104,4 +100,4 @@ Main Character schema
 
 ## Defined in
 
-[packages/core/src/enviroment.ts:66](https://github.com/ai16z/eliza/blob/main/packages/core/src/enviroment.ts#L66)
+[packages/core/src/environment.ts:66](https://github.com/monilpat/eliza/blob/main/packages/core/src/environment.ts#L66)

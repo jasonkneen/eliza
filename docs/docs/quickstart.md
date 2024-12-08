@@ -8,8 +8,9 @@ sidebar_position: 2
 
 Before getting started with Eliza, ensure you have:
 
-- [Node.js 23.1.0](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
-- [pnpm](https://pnpm.io/installation)
+- [Python 2.7+](https://www.python.org/downloads/)
+- [Node.js 23+](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+- [pnpm 9+](https://pnpm.io/installation)
 - Git for version control
 - A code editor ([VS Code](https://code.visualstudio.com/) or [VSCodium](https://vscodium.com) recommended)
 - [CUDA Toolkit](https://developer.nvidia.com/cuda-toolkit) (optional, for GPU acceleration)
@@ -35,13 +36,21 @@ Before getting started with Eliza, ensure you have:
    Switch to latest tagged release
 
    ```bash
-   git checkout v0.0.10
+    # Checkout the latest release
+    # This project iterates fast, so we recommend checking out the latest release
+    git checkout $(git describe --tags --abbrev=0)
    ```
 
    Install dependencies
 
    ```bash
    pnpm install
+   ```
+
+   Build the local libraries
+
+   ```bash
+   pnpm build
    ```
 
 2. **Configure Environment**
@@ -146,8 +155,6 @@ TWITTER_COOKIES='[{"key":"auth_token","value":"your token","domain":".twitter.co
   {"key":"guest_id","value":"your guest_id","domain":".twitter.com"}]'
 ```
 
-Using TWITTER_COOKIES makes providing TWITTER_PASSWORD and TWITTER_EMAIL unnecessary. TWITTER_USERNAME is still required.
-
 ### Telegram Bot
 
 1. Create a bot
@@ -187,7 +194,7 @@ pnpm start --characters="characters/trump.character.json,characters/tate.charact
 
 1. **Node.js Version**
 
-   - Ensure Node.js 23.1.0 is installed
+   - Ensure Node.js 23.3.0 is installed
    - Use `node -v` to check version
    - Consider using [nvm](https://github.com/nvm-sh/nvm) to manage Node versions
 
@@ -259,7 +266,7 @@ pnpm start --characters="characters/trump.character.json,characters/tate.charact
    If that doesn't work, try clearing your node_modules in the root folder
 
    ```bash
-   rm -fr node_modules; rm pnpm-lock.yaml
+   rm -fr node_modules; pnpm store prune
    ```
 
    Then reinstall the requirements

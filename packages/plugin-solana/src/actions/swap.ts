@@ -17,7 +17,7 @@ import {
     State,
     type Action,
     composeContext,
-    generateObject,
+    generateObjectDEPRECATED,
     settings,
 } from "@ai16z/eliza";
 import { TokenProvider } from "../providers/token.ts";
@@ -110,7 +110,7 @@ Example response:
 \`\`\`json
 {
     "inputTokenSymbol": "SOL",
-    "outputTokenSymbol": "USDC", 
+    "outputTokenSymbol": "USDC",
     "inputTokenCA": "So11111111111111111111111111111111111111112",
     "outputTokenCA": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
     "amount": 1.5
@@ -125,7 +125,7 @@ Given the recent messages and wallet information below:
 
 Extract the following information about the requested token swap:
 - Input token symbol (the token being sold)
-- Output token symbol (the token being bought) 
+- Output token symbol (the token being bought)
 - Input token contract address if provided
 - Output token contract address if provided
 - Amount to swap
@@ -134,7 +134,7 @@ Respond with a JSON markdown block containing only the extracted values. Use nul
 \`\`\`json
 {
     "inputTokenSymbol": string | null,
-    "outputTokenSymbol": string | null, 
+    "outputTokenSymbol": string | null,
     "inputTokenCA": string | null,
     "outputTokenCA": string | null,
     "amount": number | string | null
@@ -147,7 +147,10 @@ Respond with a JSON markdown block containing only the extracted values. Use nul
 async function getTokensInWallet(runtime: IAgentRuntime) {
     const walletProvider = new WalletProvider(
         new Connection("https://api.mainnet-beta.solana.com"),
-        new PublicKey(runtime.getSetting("WALLET_PUBLIC_KEY"))
+        new PublicKey(
+            runtime.getSetting("SOLANA_PUBLIC_KEY") ??
+                runtime.getSetting("WALLET_PUBLIC_KEY")
+        )
     );
 
     const walletInfo = await walletProvider.fetchPortfolioValue(runtime);
@@ -206,7 +209,7 @@ export const executeSwap: Action = {
             template: swapTemplate,
         });
 
-        const response = await generateObject({
+        const response = await generateObjectDEPRECATED({
             runtime,
             context: swapContext,
             modelClass: ModelClass.LARGE,
@@ -291,7 +294,8 @@ export const executeSwap: Action = {
                 "https://api.mainnet-beta.solana.com"
             );
             const walletPublicKey = new PublicKey(
-                runtime.getSetting("WALLET_PUBLIC_KEY")
+                runtime.getSetting("SOLANA_PUBLIC_KEY") ??
+                    runtime.getSetting("WALLET_PUBLIC_KEY")
             );
 
             const provider = new WalletProvider(connection, walletPublicKey);
@@ -318,7 +322,9 @@ export const executeSwap: Action = {
                 VersionedTransaction.deserialize(transactionBuf);
 
             console.log("Preparing to sign transaction...");
-            const privateKeyString = runtime.getSetting("WALLET_PRIVATE_KEY");
+            const privateKeyString =
+                runtime.getSetting("SOLANA_PRIVATE_KEY") ??
+                runtime.getSetting("WALLET_PRIVATE_KEY");
 
             // Handle different private key formats
             let secretKey: Uint8Array;
@@ -350,7 +356,9 @@ export const executeSwap: Action = {
             const keypair = Keypair.fromSecretKey(secretKey);
 
             // Verify the public key matches what we expect
-            const expectedPublicKey = runtime.getSetting("WALLET_PUBLIC_KEY");
+            const expectedPublicKey =
+                runtime.getSetting("SOLANA_PUBLIC_KEY") ??
+                runtime.getSetting("WALLET_PUBLIC_KEY");
             if (keypair.publicKey.toBase58() !== expectedPublicKey) {
                 throw new Error(
                     "Generated public key doesn't match expected public key"

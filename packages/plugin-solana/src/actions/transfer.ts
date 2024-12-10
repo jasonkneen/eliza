@@ -24,7 +24,7 @@ import {
     type Action,
 } from "@ai16z/eliza";
 import { composeContext } from "@ai16z/eliza";
-import { generateObject } from "@ai16z/eliza";
+import { generateObjectDEPRECATED } from "@ai16z/eliza";
 
 export interface TransferContent extends Content {
     tokenAddress: string;
@@ -119,10 +119,10 @@ export default {
         });
 
         // Generate transfer content
-        const content = await generateObject({
+        const content = await generateObjectDEPRECATED({
             runtime,
             context: transferContext,
-            modelClass: ModelClass.SMALL,
+            modelClass: ModelClass.LARGE,
         });
 
         // Validate transfer content
@@ -138,7 +138,9 @@ export default {
         }
 
         try {
-            const privateKeyString = runtime.getSetting("WALLET_PRIVATE_KEY")!;
+            const privateKeyString =
+                runtime.getSetting("SOLANA_PRIVATE_KEY") ??
+                runtime.getSetting("WALLET_PRIVATE_KEY");
             const secretKey = bs58.decode(privateKeyString);
             const senderKeypair = Keypair.fromSecretKey(secretKey);
 

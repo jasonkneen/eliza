@@ -1,4 +1,4 @@
-[@ai16z/eliza v0.1.4-alpha.3](../index.md) / Evaluator
+[@ai16z/eliza v0.1.5-alpha.3](../index.md) / Evaluator
 
 # Interface: Evaluator
 
@@ -14,7 +14,7 @@ Whether to always run
 
 #### Defined in
 
-[packages/core/src/types.ts:414](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L414)
+[packages/core/src/types.ts:433](https://github.com/monilpat/eliza/blob/main/packages/core/src/types.ts#L433)
 
 ***
 
@@ -26,7 +26,7 @@ Detailed description
 
 #### Defined in
 
-[packages/core/src/types.ts:417](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L417)
+[packages/core/src/types.ts:436](https://github.com/monilpat/eliza/blob/main/packages/core/src/types.ts#L436)
 
 ***
 
@@ -38,7 +38,7 @@ Similar evaluator descriptions
 
 #### Defined in
 
-[packages/core/src/types.ts:420](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L420)
+[packages/core/src/types.ts:439](https://github.com/monilpat/eliza/blob/main/packages/core/src/types.ts#L439)
 
 ***
 
@@ -50,7 +50,7 @@ Example evaluations
 
 #### Defined in
 
-[packages/core/src/types.ts:423](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L423)
+[packages/core/src/types.ts:442](https://github.com/monilpat/eliza/blob/main/packages/core/src/types.ts#L442)
 
 ***
 
@@ -62,7 +62,7 @@ Handler function
 
 #### Defined in
 
-[packages/core/src/types.ts:426](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L426)
+[packages/core/src/types.ts:445](https://github.com/monilpat/eliza/blob/main/packages/core/src/types.ts#L445)
 
 ***
 
@@ -74,7 +74,7 @@ Evaluator name
 
 #### Defined in
 
-[packages/core/src/types.ts:429](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L429)
+[packages/core/src/types.ts:448](https://github.com/monilpat/eliza/blob/main/packages/core/src/types.ts#L448)
 
 ***
 
@@ -86,4 +86,4 @@ Validation function
 
 #### Defined in
 
-[packages/core/src/types.ts:432](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L432)
+[packages/core/src/types.ts:451](https://github.com/monilpat/eliza/blob/main/packages/core/src/types.ts#L451)

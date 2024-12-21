@@ -1,4 +1,4 @@
-[@ai16z/eliza v0.1.4-alpha.3](../index.md) / LoggingLevel
+[@ai16z/eliza v0.1.6-alpha.4](../index.md) / LoggingLevel
 
 # Enumeration: LoggingLevel
 
@@ -10,7 +10,7 @@
 
 #### Defined in
 
-[packages/core/src/types.ts:1089](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L1089)
+[packages/core/src/types.ts:1220](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L1220)
 
 ***
 
@@ -20,7 +20,7 @@
 
 #### Defined in
 
-[packages/core/src/types.ts:1090](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L1090)
+[packages/core/src/types.ts:1221](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L1221)
 
 ***
 
@@ -30,4 +30,4 @@
 
 #### Defined in
 
-[packages/core/src/types.ts:1091](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L1091)
+[packages/core/src/types.ts:1222](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L1222)

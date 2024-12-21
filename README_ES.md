@@ -9,7 +9,7 @@
 -   📚 Ingestión e interacción sencilla con documentos
 -   💾 Memoria recuperable y almacenamiento de documentos
 -   🚀 Altamente extensible - cree sus propias acciones y clientes para expandir capacidades
--   ☁️ Soporta múltiples modelos, incluyendo Llama local, OpenAI, Anthropic, Groq y más
+-   ☁️ Soporta múltiples modelos, incluidos Llama local, OpenAI, Anthropic, Groq y más
 -   📦 Funciona perfectamente
 
 ## Usos
@@ -24,13 +24,13 @@
 **Requisitos (OBLIGATORIOS):**
 
 -   [Python 2.7+](https://www.python.org/downloads/)
--   [Node.js 23.1+](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+-   [Node.js 23.3+](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 -   [pnpm](https://pnpm.io/installation)
 
 ### Edite el archivo .env
 
--   Copie .env.example a .env y complete los valores apropiados
--   Edite las variables de ambiente de TWITTER para agregar nombre de usuario y contraseña del bot
+-   Copie el archivo .env.example a .env y complete los valores apropiados
+-   Edite las variables de entorno de TWITTER para agregar nombre de usuario y contraseña del bot
 
 ### Edite el archivo de personaje
 
@@ -107,6 +107,14 @@ XAI_MODEL=
 # Para consultar a Claude
 ANTHROPIC_API_KEY=
 
+# EVM
+EVM_PRIVATE_KEY=EXAMPLE_WALLET_PRIVATE_KEY
+
+# Solana
+SOLANA_PRIVATE_KEY=EXAMPLE_WALLET_PRIVATE_KEY
+SOLANA_PUBLIC_KEY=EXAMPLE_WALLET_PUBLIC_KEY
+
+# Fallback Wallet Configuration (deprecated)
 WALLET_PRIVATE_KEY=EXAMPLE_WALLET_PRIVATE_KEY
 WALLET_PUBLIC_KEY=EXAMPLE_WALLET_PUBLIC_KEY
 

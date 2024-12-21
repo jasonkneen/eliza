@@ -1,4 +1,4 @@
-[@ai16z/eliza v0.1.4-alpha.3](../index.md) / Account
+[@ai16z/eliza v0.1.6-alpha.4](../index.md) / Account
 
 # Interface: Account
 
@@ -14,7 +14,7 @@ Unique identifier
 
 #### Defined in
 
-[packages/core/src/types.ts:478](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L478)
+[packages/core/src/types.ts:505](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L505)
 
 ***
 
@@ -26,7 +26,7 @@ Display name
 
 #### Defined in
 
-[packages/core/src/types.ts:481](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L481)
+[packages/core/src/types.ts:508](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L508)
 
 ***
 
@@ -38,7 +38,7 @@ Username
 
 #### Defined in
 
-[packages/core/src/types.ts:484](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L484)
+[packages/core/src/types.ts:511](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L511)
 
 ***
 
@@ -54,7 +54,7 @@ Optional additional details
 
 #### Defined in
 
-[packages/core/src/types.ts:487](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L487)
+[packages/core/src/types.ts:514](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L514)
 
 ***
 
@@ -66,7 +66,7 @@ Optional email
 
 #### Defined in
 
-[packages/core/src/types.ts:490](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L490)
+[packages/core/src/types.ts:517](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L517)
 
 ***
 
@@ -78,4 +78,4 @@ Optional avatar URL
 
 #### Defined in
 
-[packages/core/src/types.ts:493](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L493)
+[packages/core/src/types.ts:520](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L520)

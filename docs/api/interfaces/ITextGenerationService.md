@@ -1,4 +1,4 @@
-[@ai16z/eliza v0.1.4-alpha.3](../index.md) / ITextGenerationService
+[@ai16z/eliza v0.1.6-alpha.4](../index.md) / ITextGenerationService
 
 # Interface: ITextGenerationService
 
@@ -24,7 +24,7 @@
 
 #### Defined in
 
-[packages/core/src/types.ts:927](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L927)
+[packages/core/src/types.ts:1016](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L1016)
 
 ## Methods
 
@@ -48,7 +48,7 @@ Add abstract initialize method that must be implemented by derived classes
 
 #### Defined in
 
-[packages/core/src/types.ts:932](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L932)
+[packages/core/src/types.ts:1021](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L1021)
 
 ***
 
@@ -62,7 +62,7 @@ Add abstract initialize method that must be implemented by derived classes
 
 #### Defined in
 
-[packages/core/src/types.ts:1040](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L1040)
+[packages/core/src/types.ts:1136](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L1136)
 
 ***
 
@@ -90,7 +90,7 @@ Add abstract initialize method that must be implemented by derived classes
 
 #### Defined in
 
-[packages/core/src/types.ts:1041](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L1041)
+[packages/core/src/types.ts:1137](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L1137)
 
 ***
 
@@ -118,7 +118,7 @@ Add abstract initialize method that must be implemented by derived classes
 
 #### Defined in
 
-[packages/core/src/types.ts:1049](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L1049)
+[packages/core/src/types.ts:1145](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L1145)
 
 ***
 
@@ -136,4 +136,4 @@ Add abstract initialize method that must be implemented by derived classes
 
 #### Defined in
 
-[packages/core/src/types.ts:1057](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L1057)
+[packages/core/src/types.ts:1153](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L1153)

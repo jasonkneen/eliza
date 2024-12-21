@@ -1,4 +1,4 @@
-[@ai16z/eliza v0.1.4-alpha.3](../index.md) / Character
+[@ai16z/eliza v0.1.6-alpha.4](../index.md) / Character
 
 # Type Alias: Character
 
@@ -37,6 +37,12 @@ Optional system prompt
 > **modelProvider**: [`ModelProviderName`](../enumerations/ModelProviderName.md)
 
 Model provider to use
+
+### imageModelProvider?
+
+> `optional` **imageModelProvider**: [`ModelProviderName`](../enumerations/ModelProviderName.md)
+
+Image model provider to use, if different from modelProvider
 
 ### modelEndpointOverride?
 
@@ -90,6 +96,30 @@ Optional prompt templates
 
 > `optional` **twitterShouldRespondTemplate**: `string`
 
+### templates.farcasterPostTemplate?
+
+> `optional` **farcasterPostTemplate**: `string`
+
+### templates.lensPostTemplate?
+
+> `optional` **lensPostTemplate**: `string`
+
+### templates.farcasterMessageHandlerTemplate?
+
+> `optional` **farcasterMessageHandlerTemplate**: `string`
+
+### templates.lensMessageHandlerTemplate?
+
+> `optional` **lensMessageHandlerTemplate**: `string`
+
+### templates.farcasterShouldRespondTemplate?
+
+> `optional` **farcasterShouldRespondTemplate**: `string`
+
+### templates.lensShouldRespondTemplate?
+
+> `optional` **lensShouldRespondTemplate**: `string`
+
 ### templates.telegramMessageHandlerTemplate?
 
 > `optional` **telegramMessageHandlerTemplate**: `string`
@@ -109,6 +139,14 @@ Optional prompt templates
 ### templates.discordMessageHandlerTemplate?
 
 > `optional` **discordMessageHandlerTemplate**: `string`
+
+### templates.slackMessageHandlerTemplate?
+
+> `optional` **slackMessageHandlerTemplate**: `string`
+
+### templates.slackShouldRespondTemplate?
+
+> `optional` **slackShouldRespondTemplate**: `string`
 
 ### bio
 
@@ -133,12 +171,6 @@ Example messages
 > **postExamples**: `string`[]
 
 Example posts
-
-### people
-
-> **people**: `string`[]
-
-Known people
 
 ### topics
 
@@ -184,6 +216,10 @@ Optional configuration
 
  \[`key`: `string`\]: `string`
 
+### settings.intiface?
+
+> `optional` **intiface**: `boolean`
+
 ### settings.voice?
 
 > `optional` **voice**: `object`
@@ -196,6 +232,36 @@ Optional configuration
 
 > `optional` **url**: `string`
 
+### settings.voice.elevenlabs?
+
+> `optional` **elevenlabs**: `object`
+
+### settings.voice.elevenlabs.voiceId
+
+> **voiceId**: `string`
+
+New structured ElevenLabs config
+
+### settings.voice.elevenlabs.model?
+
+> `optional` **model**: `string`
+
+### settings.voice.elevenlabs.stability?
+
+> `optional` **stability**: `string`
+
+### settings.voice.elevenlabs.similarityBoost?
+
+> `optional` **similarityBoost**: `string`
+
+### settings.voice.elevenlabs.style?
+
+> `optional` **style**: `string`
+
+### settings.voice.elevenlabs.useSpeakerBoost?
+
+> `optional` **useSpeakerBoost**: `string`
+
 ### settings.model?
 
 > `optional` **model**: `string`
@@ -203,6 +269,22 @@ Optional configuration
 ### settings.embeddingModel?
 
 > `optional` **embeddingModel**: `string`
+
+### settings.chains?
+
+> `optional` **chains**: `object`
+
+#### Index Signature
+
+ \[`key`: `string`\]: `any`[]
+
+### settings.chains.evm?
+
+> `optional` **evm**: `any`[]
+
+### settings.chains.solana?
+
+> `optional` **solana**: `any`[]
 
 ### clientConfig?
 
@@ -222,6 +304,30 @@ Optional client-specific config
 
 > `optional` **shouldIgnoreDirectMessages**: `boolean`
 
+### clientConfig.discord.shouldRespondOnlyToMentions?
+
+> `optional` **shouldRespondOnlyToMentions**: `boolean`
+
+### clientConfig.discord.messageSimilarityThreshold?
+
+> `optional` **messageSimilarityThreshold**: `number`
+
+### clientConfig.discord.isPartOfTeam?
+
+> `optional` **isPartOfTeam**: `boolean`
+
+### clientConfig.discord.teamAgentIds?
+
+> `optional` **teamAgentIds**: `string`[]
+
+### clientConfig.discord.teamLeaderId?
+
+> `optional` **teamLeaderId**: `string`
+
+### clientConfig.discord.teamMemberInterestKeywords?
+
+> `optional` **teamMemberInterestKeywords**: `string`[]
+
 ### clientConfig.telegram?
 
 > `optional` **telegram**: `object`
@@ -231,6 +337,50 @@ Optional client-specific config
 > `optional` **shouldIgnoreBotMessages**: `boolean`
 
 ### clientConfig.telegram.shouldIgnoreDirectMessages?
+
+> `optional` **shouldIgnoreDirectMessages**: `boolean`
+
+### clientConfig.telegram.shouldRespondOnlyToMentions?
+
+> `optional` **shouldRespondOnlyToMentions**: `boolean`
+
+### clientConfig.telegram.shouldOnlyJoinInAllowedGroups?
+
+> `optional` **shouldOnlyJoinInAllowedGroups**: `boolean`
+
+### clientConfig.telegram.allowedGroupIds?
+
+> `optional` **allowedGroupIds**: `string`[]
+
+### clientConfig.telegram.messageSimilarityThreshold?
+
+> `optional` **messageSimilarityThreshold**: `number`
+
+### clientConfig.telegram.isPartOfTeam?
+
+> `optional` **isPartOfTeam**: `boolean`
+
+### clientConfig.telegram.teamAgentIds?
+
+> `optional` **teamAgentIds**: `string`[]
+
+### clientConfig.telegram.teamLeaderId?
+
+> `optional` **teamLeaderId**: `string`
+
+### clientConfig.telegram.teamMemberInterestKeywords?
+
+> `optional` **teamMemberInterestKeywords**: `string`[]
+
+### clientConfig.slack?
+
+> `optional` **slack**: `object`
+
+### clientConfig.slack.shouldIgnoreBotMessages?
+
+> `optional` **shouldIgnoreBotMessages**: `boolean`
+
+### clientConfig.slack.shouldIgnoreDirectMessages?
 
 > `optional` **shouldIgnoreDirectMessages**: `boolean`
 
@@ -278,6 +428,16 @@ Optional Twitter profile
 
 > `optional` **nicknames**: `string`[]
 
+### nft?
+
+> `optional` **nft**: `object`
+
+Optional NFT prompt
+
+### nft.prompt
+
+> **prompt**: `string`
+
 ## Defined in
 
-[packages/core/src/types.ts:590](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L590)
+[packages/core/src/types.ts:629](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L629)

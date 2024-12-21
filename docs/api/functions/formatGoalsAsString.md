@@ -1,4 +1,4 @@
-[@ai16z/eliza v0.1.4-alpha.3](../index.md) / formatGoalsAsString
+[@ai16z/eliza v0.1.6-alpha.4](../index.md) / formatGoalsAsString
 
 # Function: formatGoalsAsString()
 

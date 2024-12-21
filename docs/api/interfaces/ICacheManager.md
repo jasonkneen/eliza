@@ -1,4 +1,4 @@
-[@ai16z/eliza v0.1.4-alpha.3](../index.md) / ICacheManager
+[@ai16z/eliza v0.1.6-alpha.4](../index.md) / ICacheManager
 
 # Interface: ICacheManager
 
@@ -22,7 +22,7 @@
 
 #### Defined in
 
-[packages/core/src/types.ts:908](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L908)
+[packages/core/src/types.ts:997](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L997)
 
 ***
 
@@ -48,7 +48,7 @@
 
 #### Defined in
 
-[packages/core/src/types.ts:909](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L909)
+[packages/core/src/types.ts:998](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L998)
 
 ***
 
@@ -66,4 +66,4 @@
 
 #### Defined in
 
-[packages/core/src/types.ts:910](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L910)
+[packages/core/src/types.ts:999](https://github.com/ai16z/eliza/blob/main/packages/core/src/types.ts#L999)
